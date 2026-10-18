@@ -1,116 +1,173 @@
-# Aurora University Hostel Booking System
+# Software Construction Assignments
 
-**Course:** SEN-311 Software Construction
-**Assignment:** Assignment 1 — Case Study Critique and Redesign
-**University:** Bahria University Islamabad
+This repository contains Java implementations completed for the **SEN-311 Software Construction** course at **Bahria University Islamabad**.
 
-## Assignment Overview
+The work was completed by:
 
-Aurora University Hostel Booking System is a Java Swing desktop application designed to solve the booking problems identified in the Aurora University hostel case study.
+- **Ahitsham Khan**
+- **Ali Huzaifa**
 
-The system manages student hostel reservations while enforcing important business rules such as one active reservation per student, room availability, accessibility requirements, 48-hour deposit expiration, cancellation, room switching, and audit logging.
+## Repository Contents
 
-The project uses Java Standard Library components only and follows a Model-Service-GUI architecture.
+### Assignment 1 — Aurora University Hostel Booking System
 
-## Key Features
+A Java Swing desktop application that redesigns the Aurora University hostel booking case study. The system demonstrates practical software construction principles while enforcing realistic booking rules.
 
-* Student login and authentication
-* One active reservation per student
-* Room availability management
-* Protection against duplicate and conflicting bookings
-* 48-hour unpaid booking expiration
-* Accessibility-aware room allocation
-* Booking cancellation
-* Room switching
-* Interrupted request handling
-* Timestamped audit logging
-* Admin time simulation for testing expiration
+#### Implemented features
+
+- Student login and authentication
+- Room availability management
+- One active booking per student
+- Prevention of duplicate and conflicting bookings
+- Accessibility-aware room allocation
+- Deposit payment tracking
+- 48-hour unpaid booking expiration
+- Booking cancellation
+- Room switching
+- Timestamped audit logging
+- Admin time simulation for testing expiration behavior
+- Handling of invalid or interrupted booking requests
+
+#### Architecture
+
+The application uses a clear separation of responsibilities:
+
+- **Model:** Students, rooms, bookings, booking statuses, room types, and audit logs
+- **Service:** Booking rules, validation, room allocation, payment handling, cancellation, switching, and expiration logic
+- **GUI:** Java Swing screens for login, booking, room availability, administration, and audit logs
+- **Utilities:** Shared user-interface helper methods
+
+### Assignment 2 — Music Organizer
+
+A Java application based on a music-organizer system. It manages music files and tracks and demonstrates collection handling, searching, playback sequencing, ratings, and removal operations.
+
+#### Implemented features
+
+- Add and count music files
+- List files with indexes
+- Search for files by name
+- Validate invalid file indexes
+- Create and manage tracks
+- Store track title, artist, audio path, and rating
+- Play tracks sequentially by artist
+- Remove tracks by title
+- Use a sample WAV audio file for testing
+
+## Software Construction Principles
+
+The implementations demonstrate the following principles:
+
+- **Minimizing Complexity:** Responsibilities are divided into focused model, service, GUI, and utility classes.
+- **Anticipating Change:** Booking rules and domain concepts are represented through reusable classes and enums such as `RoomType`, `RoomStatus`, and `BookingStatus`.
+- **Reuse:** Common operations are centralized in service and organizer classes instead of being duplicated across user-interface code.
+- **Constructing for Verification:** Validation, deterministic time parameters, audit logs, and executable scenarios make important behaviors easier to verify.
+- **Standards in Construction:** The code follows package organization, meaningful class names, encapsulation, and consistent Java conventions.
 
 ## Technology Stack
 
-| Component             | Technology              |
-| --------------------- | ----------------------- |
-| Language              | Java 11+                |
-| GUI                   | Java Swing              |
-| Data Storage          | In-memory ArrayList     |
-| Date and Time         | java.time.LocalDateTime |
-| Architecture          | Model-Service-GUI       |
-| External Dependencies | None                    |
+| Component | Technology |
+| --- | --- |
+| Language | Java 11 or later |
+| GUI | Java Swing |
+| Collections | Java Standard Library collections |
+| Date and time | `java.time.LocalDateTime` |
+| Data storage | In-memory collections |
+| Audio testing | WAV audio file through Java file/audio support |
+| External dependencies | None |
 
 ## Project Structure
 
 ```text
-AuroraHostelBooking/
+Software-Construction/
 ├── README.md
 └── src/
-    └── aurorahostel/
+    ├── Assignment-1-aurorahostel/
+    │   ├── Main.java
+    │   ├── gui/
+    │   │   ├── AdminPanel.java
+    │   │   ├── AuditLogPanel.java
+    │   │   ├── BookingPanel.java
+    │   │   ├── DashboardFrame.java
+    │   │   ├── LoginFrame.java
+    │   │   ├── MyBookingPanel.java
+    │   │   └── RoomAvailabilityPanel.java
+    │   ├── model/
+    │   │   ├── AuditLog.java
+    │   │   ├── Booking.java
+    │   │   ├── BookingStatus.java
+    │   │   ├── Room.java
+    │   │   ├── RoomStatus.java
+    │   │   ├── RoomType.java
+    │   │   └── Student.java
+    │   ├── service/
+    │   │   └── BookingService.java
+    │   └── util/
+    │       └── UIUtils.java
+    └── Assignment-2-Music-Organizer/
         ├── Main.java
-        ├── model/
-        │   ├── Student.java
-        │   ├── Room.java
-        │   ├── Booking.java
-        │   ├── AuditLog.java
-        │   ├── RoomType.java
-        │   ├── RoomStatus.java
-        │   └── BookingStatus.java
-        ├── service/
-        │   └── BookingService.java
-        ├── gui/
-        │   ├── LoginFrame.java
-        │   ├── DashboardFrame.java
-        │   ├── BookingPanel.java
-        │   ├── MyBookingPanel.java
-        │   ├── RoomAvailabilityPanel.java
-        │   ├── AdminPanel.java
-        │   └── AuditLogPanel.java
-        └── util/
-            └── UIUtils.java
+        ├── MusicOrganizer.java
+        ├── MusicOrganizerGUI.java
+        ├── MusicPlayer.java
+        ├── Track.java
+        └── audio/
+            └── sample.wav
 ```
-
-## Architecture
-
-The application separates responsibilities into three main layers:
-
-**Model:** Represents students, rooms, bookings, and audit logs.
-
-**Service:** Contains the core booking rules and business logic.
-
-**GUI:** Provides the Java Swing interface through which students and administrators interact with the system.
-
-## Software Construction Principles
-
-The implementation demonstrates:
-
-* Minimizing Complexity through separation of responsibilities
-* Anticipating Change through flexible booking rules
-* Reuse through common service methods and model classes
-* Constructing for Verification through validation and audit logging
-* Standards in Construction through organized packages and consistent Java conventions
-
-## Testing
-
-The system tests important scenarios including:
-
-1. Successful room booking
-2. Multiple booking prevention
-3. Last-room booking conflict
-4. Deposit payment
-5. Booking cancellation
-6. Room switching
-7. Accessibility-based allocation
-8. 48-hour booking expiration
-9. Interrupted request handling
-
-## Limitations
-
-The current version uses in-memory data and does not require a database or external services. Data is lost when the application is restarted.
-
-The application is intended as an academic implementation of the Aurora University case study rather than a production hostel management system.
 
 ## How to Run
 
-1. Open the project in IntelliJ IDEA.
-2. Configure Java JDK 11 or later.
-3. Ensure `src` is marked as the Sources Root.
-4. Open `Main.java`.
-5. Run the `main` method.
+### Assignment 1: Hostel Booking System
+
+1. Open the repository in IntelliJ IDEA, Eclipse, or another Java IDE.
+2. Configure a Java 11 or later JDK.
+3. Mark `src/Assignment-1-aurorahostel` as a source root, or configure the source path according to your IDE.
+4. Run `src/Assignment-1-aurorahostel/Main.java`.
+5. Use the sample students initialized by `Main.java` to explore the booking workflow.
+
+### Assignment 2: Music Organizer
+
+1. Configure a Java 11 or later JDK.
+2. Open the `src/Assignment-2-Music-Organizer` directory as a source directory or project module.
+3. Ensure the relative path to `audio/sample.wav` is available from the project working directory.
+4. Run `src/Assignment-2-Music-Organizer/Main.java`.
+
+## Verification Scenarios
+
+The hostel booking implementation supports scenarios such as:
+
+1. Successful room booking
+2. Duplicate booking prevention
+3. Room availability conflict handling
+4. Deposit payment before the deadline
+5. Rejection of late deposit payment
+6. Booking cancellation and room release
+7. Room switching
+8. Accessibility-based allocation
+9. Automatic expiration of unpaid bookings
+10. Audit logging of important events
+
+The music organizer implementation demonstrates:
+
+1. File collection and counting
+2. File search
+3. Invalid index handling
+4. Track collection management
+5. Track rating
+6. Sequential playback by artist
+7. Track removal
+
+## Limitations
+
+- Data is stored in memory and is lost when the program terminates.
+- The sample applications do not use a database or external services.
+- Authentication is intended for academic demonstration rather than production security.
+- The applications are educational implementations and are not intended to be deployed as production hostel or music-management systems without additional testing and persistence support.
+
+## Future Improvements
+
+- Add automated unit tests with JUnit.
+- Introduce persistent storage using a database or file-based repository.
+- Add stronger authentication and authorization.
+- Improve exception handling and user-facing error messages.
+- Add build configuration with Maven or Gradle.
+- Add continuous integration for compilation and testing.
+- Improve accessibility and responsive behavior in the Swing interface.
